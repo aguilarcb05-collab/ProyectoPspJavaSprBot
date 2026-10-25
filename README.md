@@ -30,5 +30,5 @@ Creas un proyecto en eclipse y ahi haces tu parte, tus mamadas. Ahora, debereis 
 
   OBVIAMENTE CREAIS UNA RAMA NUEVA Y OS DESPLAZAIS A ELLA PARA TRABAJAR EN ESA RAMA SABES
 
-6. git remote add origin https://github.com
+6. git remote add origin https://github.......... RUTA DE ESTE REPOSITORIO
 7. git push -u origin nombre-de-tu-rama
