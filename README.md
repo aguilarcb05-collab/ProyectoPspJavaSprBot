@@ -9,11 +9,12 @@ okey okey okey hasta este punto algunos individuos de este grupo se pensaran. va
 
 Creas un proyecto en eclipse y ahi haces tu parte, tus mamadas. Ahora, debereis instalar git bash. Una vez instalado git bash podeis subir ramas a este repositorio. COMO?
 1. cd (RUTA DE MI PROYECTO) desde la terminal cmd o donde sea. Nos ubicamos en el proyecto de nuestro eclipse (NOTA: SI EN ESE PROYECTO SE ENCUENTRA .METADATA DEL WORKSPACE DEBEREIS CREAR UN .IGNOREGIT)
-2. escribir git init
-3. escribir git add .
-4. git commit -m "LOQUESEA"
-5. A partir de aqui creas una nueva rama. ACA OS DEJO TODOS LOS COMANDOS QUE QUERAIS PARA CREARLA
-    🌿 Creación y Navegación de Ramas
+2.  escribir git init
+3.  escribir git add .
+4.  git commit -m "LOQUESEA"
+5.   A partir de aqui creas una nueva rama. ACA OS DEJO TODOS LOS COMANDOS QUE QUERAIS PARA CREARLA:
+Creación y Navegación de Ramas
+    
     
     • git branch <nombre> – Crea una rama nueva sin moverte de la actual.
     • git switch -c <nombre> – Crea una rama nueva y se mueve a ella automáticamente.
