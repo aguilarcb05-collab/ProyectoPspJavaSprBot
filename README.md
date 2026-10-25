@@ -1,35 +1,123 @@
-# ProyectoPspJavaSprBot
-Chicos y chicas del grupo:
-En esta tarea vamos a trabajar todos juntos para hacer el proyecto de SpringBoot desde este repositorio a nuestro IDE de eclipe ok?
-Okey, entonces. Cada individuo va a hacer una parte del proyecto para avanzar de forma paulatina es decir. EJ: Yo hago 3 clases y 3 repositorios y 3 servicios de esa misma clase. Luego otro ira avanzando y completando las clases restantes. Eso lo hiremos viendo pero vamos a lo tocho.
-NOS TENEMOS QUE PONER DE ACUERDO CON QUE HACER CADA UNO. Y CUANDO HAGAMOS ESO EN ECLIPSE HACE CADA UNO SU PARTE Y LO SUBE A ESTE REPOSITORIO DESDE UNA RAMA DIFERENTE. EL MAIN NO, EL MAIN SOLO PARA UNIRLO Y COMPLETARLO OK?
-ENTONCES, CADA UNO CREARA UNA RAMA, INDICANDO VUESTRO NOMBRE PARA IDENTIFICAR DE QUIEN ES ESA RAMA. HASTA AHÍ OK, EN ESA RAMA ES CUANDO VAIS A METER VUESTRA PARTE: EJ
-RamaCarlos -> las clases repositorios y endpoint que yo he creado. RamaRafael -> dos clases mas, etc etc...
-okey okey okey hasta este punto algunos individuos de este grupo se pensaran. vale bro y como se hace eso 😭. Yo lo explico de forma breve.
+# Proyecto Spring Boot en grupo
 
-Creas un proyecto en eclipse y ahi haces tu parte, tus mamadas. Ahora, debereis instalar git bash. Una vez instalado git bash podeis subir ramas a este repositorio. COMO?
-1. cd (RUTA DE MI PROYECTO) desde la terminal cmd o donde sea. Nos ubicamos en el proyecto de nuestro eclipse (NOTA: SI EN ESE PROYECTO SE ENCUENTRA .METADATA DEL WORKSPACE DEBEREIS CREAR UN .IGNOREGIT)
-2.  escribir git init
-3.  escribir git add .
-4.  git commit -m "LOQUESEA"
-5.   A partir de aqui creas una nueva rama. ACA OS DEJO TODOS LOS COMANDOS QUE QUERAIS PARA CREARLA:
-Creación y Navegación de Ramas
-    
-    
-    • git branch <nombre> – Crea una rama nueva sin moverte de la actual.
-    • git switch -c <nombre> – Crea una rama nueva y se mueve a ella automáticamente.
-    • git switch <nombre> – Cambia a una rama que ya existe.
-    • git branch -a – Muestra todas las ramas (locales y las del servidor remoto).
-    
-    🛠️ Gestión y Limpieza de Ramas
-    • git branch -m <nuevo-nombre> – Renombra la rama en la que estás posicionado actualmente.
-    • git branch -d <nombre> – Borra una rama de forma segura (solo si ya has fusionado sus cambios).
-    • git branch -D <nombre> – Fuerza el borrado de una rama (incluso si tiene cambios sin guardar).
-    • git branch -m <nuevo-nombre> – Renombra la rama en la que estás posicionado actualmente.
-    • git branch -d <nombre> – Borra una rama de forma segura (solo si ya has fusionado sus cambios).
-    • git branch -D <nombre> – Fuerza el borrado de una rama (incluso si tiene cambios sin guardar).
+Chicos y chicas del grupo: en esta tarea vamos a trabajar todos juntos para hacer el proyecto de Spring Boot desde este repositorio a nuestro Eclipse, ok?
 
-  OBVIAMENTE CREAIS UNA RAMA NUEVA Y OS DESPLAZAIS A ELLA PARA TRABAJAR EN ESA RAMA SABES
+Cada uno va a hacer una parte del proyecto para ir avanzando poco a poco. Ej: yo hago 3 clases, 3 repositorios y 3 servicios de esas mismas clases. Luego otro va avanzando y completando las clases que queden. Eso ya lo iremos viendo, pero vamos a lo tocho.
 
-6. git remote add origin https://github.......... RUTA DE ESTE REPOSITORIO
-7. git push -u origin nombre-de-tu-rama
+**NOS TENEMOS QUE PONER DE ACUERDO EN QUÉ HACE CADA UNO. Y CUANDO LO TENGAMOS, CADA UNO HACE SU PARTE EN ECLIPSE Y LA SUBE A ESTE REPOSITORIO DESDE UNA RAMA DIFERENTE. EL MAIN NO. EL MAIN SOLO PARA UNIRLO Y COMPLETARLO, OK?**
+
+Entonces, cada uno crea una rama con su nombre para identificar de quién es. En esa rama es donde metéis vuestra parte. Ej:
+
+- `RamaCarlos` -> las clases, repositorios y endpoints que yo he creado
+- `RamaRafael` -> dos clases más, y así
+
+Hasta aquí ok, y algunos os estaréis pensando: vale bro, ¿y cómo se hace eso? 😭 Pues os lo explico rápido.
+
+## Antes de nada
+
+1. Instalad **Git** (con Git Bash): https://git-scm.com/downloads
+2. Configurad vuestro nombre y correo (solo una vez):
+
+```
+git config --global user.name "Tu Nombre"
+git config --global user.email "tucorreo@ejemplo.com"
+```
+
+3. Cuando hagáis push, GitHub os va a pedir contraseña y NO vale la de siempre, hay que usar un **token** (GitHub -> Settings -> Developer settings -> Personal access tokens). Ese token es lo que pegáis donde pide la contraseña.
+
+**Proyecto base:** uno de nosotros crea el proyecto Spring Boot (pom.xml, application.properties y el paquete principal) y lo sube al main. El resto parte de ESE proyecto, no os creéis cada uno el vuestro porque luego los paquetes y las dependencias no cuadran y es un drama.
+
+## Cómo subir vuestra parte
+
+1. Abrid la terminal (cmd o Git Bash) en la carpeta donde queráis tener el proyecto y clonad el repositorio:
+
+```
+git clone https://github.com/....... (RUTA DE ESTE REPOSITORIO)
+cd nombre-del-repositorio
+```
+
+**OJO: NO hagáis `git init`.** El repositorio ya existe, se clona. Si hacéis `git init` y luego lo conectáis a mano, vuestra carpeta no tiene nada que ver con el main y luego no se puede unir (os saldrá `refusing to merge unrelated histories`).
+
+2. Creáis vuestra rama y os movéis a ella (esto es lo más importante, trabajáis SIEMPRE en vuestra rama):
+
+```
+git switch -c RamaCarlos
+```
+
+(ponéis vuestro nombre, claro)
+
+3. Abrís el proyecto en Eclipse: File -> Import -> Maven -> Existing Maven Projects, y seleccionáis la carpeta que acabáis de clonar. Ahí hacéis vuestra parte, vuestras clases, repositorios, servicios y endpoints. Solo los que os tocan, no toquéis lo de los demás.
+
+4. Cuando tengáis algo hecho, lo subís:
+
+```
+git add .
+git commit -m "LO QUE SEA (mejor algo que se entienda, tipo: añado Usuario y Admin con sus repos)"
+git push -u origin RamaCarlos
+```
+
+El `-u` solo la primera vez, las siguientes con `git push` vale.
+
+Y ya está, vuestra rama aparece en GitHub.
+
+## El .gitignore
+
+**NOTA:** si en la carpeta se os cuelan cosas del propio Eclipse (como `.metadata` del workspace) o carpetas de compilación, tenéis que crear un archivo que se llame `.gitignore` (con el punto delante y tal cual, no `.ignoregit`) y meter dentro esto:
+
+```
+target/
+.metadata/
+.settings/
+.classpath
+.project
+```
+
+Si no, os dará conflictos a cada rato por cosas que no importan.
+
+## Comandos de ramas
+
+Por si queréis trastear:
+
+```
+Creación y navegación
+git branch <nombre>       -> crea una rama nueva sin moverte de la actual
+git switch -c <nombre>    -> crea una rama nueva y te mueve a ella
+git switch <nombre>       -> cambia a una rama que ya existe
+git branch -a             -> muestra todas las ramas (locales y del servidor)
+
+Gestión y limpieza
+git branch -m <nuevo>     -> renombra la rama en la que estás
+git branch -d <nombre>    -> borra una rama de forma segura (solo si ya está fusionada)
+git branch -D <nombre>    -> fuerza el borrado (aunque tenga cambios sin fusionar)
+```
+
+Y antes de hacer commit, mirad en qué rama estáis con `git branch` o `git status`, que como hagáis commit en main sin querer la liamos.
+
+## Ejemplo de todo seguido
+
+Yo soy Carlos y me tocan Usuario y Admin:
+
+```
+git clone https://github.com/....
+cd nombre-del-repositorio
+git switch -c RamaCarlos
+(hago mis clases en Eclipse)
+git add .
+git commit -m "Añado Usuario y Admin con repositorios y servicios"
+git push -u origin RamaCarlos
+```
+
+Rafael hace lo mismo pero con `RamaRafael` y sus clases.
+
+## Cómo se junta todo en el main
+
+Cuando tengáis vuestra parte subida, entráis a GitHub y os sale un botón de "Compare & pull request". Le dais, lo creáis de vuestra rama hacia main, y avisáis por el grupo para que lo miremos y lo unamos. Así el main no se rompe.
+
+## Si os sale algún error
+
+- `refusing to merge unrelated histories` -> hicisteis `git init` en vez de `git clone`. Borrad la carpeta y clonad de nuevo.
+- `rejected` al hacer push -> alguien ha subido antes que vosotros. Haced `git pull` y luego `git push`.
+- Conflicto en `pom.xml` o `application.properties` -> los han tocado dos personas. Hablad antes de tocarlos, que los cambie solo uno.
+- Os pide contraseña y no va -> es el token, ya lo expliqué arriba.
+
+Y nada, a picar código. Cualquier duda preguntad en el grupo antes de liarla. 💻
