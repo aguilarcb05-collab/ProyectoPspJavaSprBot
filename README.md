@@ -32,8 +32,8 @@ git config --global user.email "tucorreo@ejemplo.com"
 1. Abrid la terminal (cmd o Git Bash) en la carpeta donde queráis tener el proyecto y clonad el repositorio:
 
 ```
-git clone https://github.com/....... (RUTA DE ESTE REPOSITORIO)
-cd nombre-del-repositorio
+git clone https://github.com/aguilarcb05-collab/ProyectoPspJavaSprBot.git (RUTA DE ESTE REPOSITORIO) 
+cd ProyectoPspJavaSprBot (ES EL PROYECTO BASE, CLONADO)
 ```
 
 **OJO: NO hagáis `git init`.** El repositorio ya existe, se clona. Si hacéis `git init` y luego lo conectáis a mano, vuestra carpeta no tiene nada que ver con el main y luego no se puede unir (os saldrá `refusing to merge unrelated histories`).
