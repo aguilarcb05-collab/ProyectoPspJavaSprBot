@@ -16,14 +16,6 @@ Hasta aquí ok, y algunos os estaréis pensando: vale bro, ¿y cómo se hace eso
 ## Antes de nada
 
 1. Instalad **Git** (con Git Bash): https://git-scm.com/downloads
-2. Configurad vuestro nombre y correo (solo una vez):
-
-```
-git config --global user.name "Tu Nombre"
-git config --global user.email "tucorreo@ejemplo.com"
-```
-
-3. Cuando hagáis push, GitHub os va a pedir contraseña y NO vale la de siempre, hay que usar un **token** (GitHub -> Settings -> Developer settings -> Personal access tokens). Ese token es lo que pegáis donde pide la contraseña.
 
 **Proyecto base:** uno de nosotros crea el proyecto Spring Boot (pom.xml, application.properties y el paquete principal) y lo sube al main. El resto parte de ESE proyecto, no os creéis cada uno el vuestro porque luego los paquetes y las dependencias no cuadran y es un drama.
 
