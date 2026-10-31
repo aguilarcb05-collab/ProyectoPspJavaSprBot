@@ -1,4 +1,4 @@
-package springboot.psp.tareaMartes;
+package springboot.psp.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,7 +9,6 @@ public class TareaMartesApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TareaMartesApplication.class, args);
 		
-		aaaa
 	}
 
 }
