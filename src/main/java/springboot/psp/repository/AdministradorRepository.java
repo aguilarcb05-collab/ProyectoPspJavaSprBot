@@ -7,5 +7,5 @@ import springboot.psp.entity.Administrador;
 
 @Repository
 public interface AdministradorRepository extends JpaRepository<Administrador, Integer>{
-
+	
 }
