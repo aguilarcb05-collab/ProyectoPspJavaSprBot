@@ -7,9 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.ManyToOne;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.NotNull;
 import springboot.psp.entity.Actividad;
 import springboot.psp.entity.Solicitud;
 import springboot.psp.entity.TipoEstadoSolicitud;
@@ -107,24 +105,13 @@ public class SolicitudService {
 	}
 	
 	//3a
-	@NotNull
-	private LocalDate fechaSolicitud;
-	@NotNull
-	private TipoEstadoSolicitud tipoSolicitud;
-	
-	@ManyToOne
-	private Usuario usuario;
-	
-	@ManyToOne
-	private Actividad actividad;
-	
 	@Transactional
 	public Solicitud crearSolicitudDeInscripcion(int idUsuario, int idActividad) {
 		Solicitud solicitudNueva=new Solicitud();
 		Optional<Usuario> usuarioOpcional=usuarioRepository.findById(idUsuario);
 		Optional<Actividad> actividadOpcional=actividadRepository.findById(idActividad);
 		if(usuarioOpcional.isPresent()&&actividadOpcional.isPresent()) {
-			solicitudNueva=new Solicitud(LocalDate.now(),tipoSolicitud.PENDIENTE,usuarioOpcional.get(),actividadOpcional.get());
+			solicitudNueva=new Solicitud(LocalDate.now(),TipoEstadoSolicitud.PENDIENTE,usuarioOpcional.get(),actividadOpcional.get());
 		}
 		return solicitudNueva;
 	}
