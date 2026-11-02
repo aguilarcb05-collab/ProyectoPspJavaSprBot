@@ -19,6 +19,11 @@ public class NoticiaService {
 	public List<Noticia> listaNoticias() {
 		return noticiaRepository.findAll();
 	}
+	
+	//4e
+	public Optional<Noticia> verNoticia(int idNoticia){
+		return noticiaRepository.findById(idNoticia);
+	}
 	//4e
 	public Noticia crearNoticia(Noticia noticiaNueva) {
 		return noticiaRepository.save(noticiaNueva);
@@ -38,10 +43,12 @@ public class NoticiaService {
 	}
 	//4e
 	@Transactional
-	public void eliminarNoticia(int idNoticia) {
+	public boolean eliminarNoticia(int idNoticia) {
 		Optional<Noticia> noticiaOpcional=noticiaRepository.findById(idNoticia);
 		if(noticiaOpcional.isPresent()) {
 			noticiaRepository.deleteById(idNoticia);
+			return true;
 		}
+		return false;
 	}
 }

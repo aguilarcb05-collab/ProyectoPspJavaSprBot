@@ -29,6 +29,10 @@ public class SolicitudService {
 	public List<Solicitud> listaSolicituds(){
 		return solicitudRepository.findAll();
 	}
+	//4c
+	public Optional<Solicitud> verSolicitud(int idSolicitud){
+		return solicitudRepository.findById(idSolicitud);
+	}
 	
 	//4c
 	@Transactional

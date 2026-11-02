@@ -34,6 +34,11 @@ public class ActividadService {
 		return actividadRepository.findAll();
 	}
 	//4b
+	public Optional<Actividad> buscarActividad(int idActividad){
+		return actividadRepository.findById(idActividad);
+	}
+	
+	//4b
 	public Actividad crearActividad(Actividad actividadNueva) {
 		return actividadRepository.save(actividadNueva);
 	}
@@ -68,6 +73,7 @@ public class ActividadService {
 	
 	//3b
 	//En la actividad pone valoracion, pero creo que se refiere a nuevo comentario y ahí una valoración descriptiva. Por eso pongo este metodo de añadir comentario (Propuesta de Carlos, pd:soy muy listo. Por tanto, en el UML comentario deberia ir dentro de Actividad, no solicitud. Es un error)
+	@Transactional
 	public Actividad añadirComentario(int idActividad,Actividad actividadConComentario,String nuevoComentario) {
 		Optional<Actividad> actividadOpcional=actividadRepository.findById(idActividad);
 		if(actividadOpcional.isPresent()) {
