@@ -45,22 +45,19 @@ public class SolicitudService {
 	        Actividad actividad = actividadOpcional.get();
 	        Solicitud s = solicitudOpcional.get();
 	        
-	        if (actividad.getSolicitudes().contains(s)) {
-	            
+	        if (s.getActividad() != null && s.getActividad().getId() == actividad.getId()) {
+
 	            int contadorAprobadas = 0;
 	            for (Solicitud solicitudActual : actividad.getSolicitudes()) {
 	                if (solicitudActual.getTipoSolicitud().equals(TipoEstadoSolicitud.APROBADA)) {
 	                    contadorAprobadas++;
 	                }
 	            }
-	            
-	            if (actividad.getMaximosParticipantes() > contadorAprobadas) {
-	                
-	                // Si no estaba aprobada ya, la aprobamos
-	                if (!s.getTipoSolicitud().equals(TipoEstadoSolicitud.APROBADA)) {
-	                    s.setTipoSolicitud(TipoEstadoSolicitud.APROBADA);
-	                    return s;
-	                }
+
+	            if (actividad.getMaximosParticipantes() > contadorAprobadas
+	            		&& s.getTipoSolicitud().equals(TipoEstadoSolicitud.PENDIENTE)) {
+	                s.setTipoSolicitud(TipoEstadoSolicitud.APROBADA);
+	                return s;
 	            }
 	        }
 	    }
@@ -111,12 +108,13 @@ public class SolicitudService {
 	//3a
 	@Transactional
 	public Solicitud crearSolicitudDeInscripcion(int idUsuario, int idActividad) {
-		Solicitud solicitudNueva=new Solicitud();
-		Optional<Usuario> usuarioOpcional=usuarioRepository.findById(idUsuario);
-		Optional<Actividad> actividadOpcional=actividadRepository.findById(idActividad);
-		if(usuarioOpcional.isPresent()&&actividadOpcional.isPresent()) {
-			solicitudNueva=new Solicitud(LocalDate.now(),TipoEstadoSolicitud.PENDIENTE,usuarioOpcional.get(),actividadOpcional.get());
+		Optional<Usuario> usuarioOpcional = usuarioRepository.findById(idUsuario);
+		Optional<Actividad> actividadOpcional = actividadRepository.findById(idActividad);
+		if (usuarioOpcional.isPresent() && actividadOpcional.isPresent()) {
+			Solicitud solicitudNueva = new Solicitud(LocalDate.now(), TipoEstadoSolicitud.PENDIENTE,
+					usuarioOpcional.get(), actividadOpcional.get());
+			return solicitudRepository.save(solicitudNueva);
 		}
-		return solicitudNueva;
+		return null;
 	}
 }

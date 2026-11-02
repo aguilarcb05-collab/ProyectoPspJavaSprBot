@@ -3,33 +3,38 @@ package springboot.psp.entity;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class Solicitud {
+public class Solicitud extends DomainEntity {
+
 	@NotNull
 	private LocalDate fechaSolicitud;
+
 	@NotNull
+	@Enumerated(EnumType.STRING)
 	private TipoEstadoSolicitud tipoSolicitud;
-	
+
 	@ManyToOne
 	private Usuario usuario;
-	
+
 	@ManyToOne
 	private Actividad actividad;
 
-	public Solicitud(@NotNull LocalDate fechaSolicitud, @NotNull TipoEstadoSolicitud tipoSolicitud, Usuario usuario,
+	public Solicitud() {
+		super();
+	}
+
+	public Solicitud(LocalDate fechaSolicitud, TipoEstadoSolicitud tipoSolicitud, Usuario usuario,
 			Actividad actividad) {
 		super();
 		this.fechaSolicitud = fechaSolicitud;
 		this.tipoSolicitud = tipoSolicitud;
 		this.usuario = usuario;
 		this.actividad = actividad;
-	}
-
-	public Solicitud() {
-		super();
 	}
 
 	public LocalDate getFechaSolicitud() {
@@ -63,8 +68,4 @@ public class Solicitud {
 	public void setActividad(Actividad actividad) {
 		this.actividad = actividad;
 	}
-	
-	
-	
-	
 }
