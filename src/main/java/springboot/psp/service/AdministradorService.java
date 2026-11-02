@@ -36,8 +36,12 @@ public class AdministradorService {
 		return administradorRepository.findAll();
 	}
 	//4a
-	public Optional<Administrador> revisarAdministrador(int idAdminisrador){
-		return administradorRepository.findById(idAdminisrador);
+	public Administrador revisarAdministrador(int idAdminisrador){
+		Optional<Administrador> administradorOpcional=administradorRepository.findById(idAdminisrador);
+		if(administradorOpcional.isPresent()) {
+			return administradorOpcional.get();
+		}
+		return null;
 	}
 	
 	
