@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import springboot.psp.entity.Actividad;
 import springboot.psp.entity.Administrador;
+import springboot.psp.entity.Noticia;
 import springboot.psp.entity.Solicitud;
 import springboot.psp.entity.TipoEstadoSolicitud;
 import springboot.psp.entity.Usuario;
 import springboot.psp.repository.ActividadRepository;
 import springboot.psp.repository.AdministradorRepository;
+import springboot.psp.repository.NoticiaRepository;
 import springboot.psp.repository.SolicitudRepository;
 import springboot.psp.repository.UsuarioRepository;
 
@@ -28,6 +30,8 @@ public class AdministradorService {
 	private ActividadRepository actividadRepository;
 	@Autowired
 	private SolicitudRepository solicitudRepository;
+	@Autowired
+	private NoticiaRepository noticiaRepository;
 	
 	public List<Usuario> revisarUsuario(){
 		return usuarioRepository.findAll();
@@ -123,6 +127,38 @@ public class AdministradorService {
 			}
 		}
 		return null;
+	}
+	
+	//ME FALTA EL CODIGO DEL APARTADO D
+	
+	@Transactional
+	public List<Noticia> listaNoticias() {
+		return noticiaRepository.findAll();
+	}
+	
+	public Noticia crearNoticia(Noticia noticiaNueva) {
+		return noticiaRepository.save(noticiaNueva);
+	}
+	
+	@Transactional
+	public Noticia modificarNoticia(int idNoticia, Noticia noticiaModificada) {
+		Optional<Noticia> noticiaOpcional=noticiaRepository.findById(idNoticia);
+		if(noticiaOpcional.isPresent()) {
+			noticiaOpcional.get().setTitulo(noticiaModificada.getTitulo());
+			noticiaOpcional.get().setContenido(noticiaModificada.getContenido());
+			noticiaOpcional.get().setFechaPublicacion(noticiaModificada.getFechaPublicacion());
+			noticiaOpcional.get().setImagen(noticiaModificada.getImagen());
+			return noticiaOpcional.get();
+		}
+		return null;
+	}
+	
+	@Transactional
+	public void eliminarNoticia(int idNoticia) {
+		Optional<Noticia> noticiaOpcional=noticiaRepository.findById(idNoticia);
+		if(noticiaOpcional.isPresent()) {
+			noticiaRepository.deleteById(idNoticia);
+		}
 	}
 	
 }

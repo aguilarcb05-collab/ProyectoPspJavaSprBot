@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -35,6 +36,7 @@ public class Actividad extends DomainEntity{
     @NotBlank
     private TipoEstadoActividad estadoActividad;
     
+    @OneToMany
     private List<Solicitud> solicitudes;
 
     
