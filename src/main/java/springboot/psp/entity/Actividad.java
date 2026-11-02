@@ -38,6 +38,8 @@ public class Actividad extends DomainEntity{
     
     @OneToMany
     private List<Solicitud> solicitudes;
+    
+    private String comentario;
 
     
 
@@ -50,10 +52,16 @@ public class Actividad extends DomainEntity{
 
     
 
+	
+
+
+
+
+
 	public Actividad(int id, int version, @NotBlank String nombre, @NotBlank String descripcion,
 			@NotNull LocalDate fecha, @NotNull LocalDateTime horaInicio, @NotNull LocalDateTime horaFinalizacion,
 			@NotNull String ubicacion, @NotNull int maximosParticipantes, @NotBlank TipoEstadoActividad estadoActividad,
-			List<Solicitud> solicitudes) {
+			List<Solicitud> solicitudes, String comentario) {
 		super(id, version);
 		this.nombre = nombre;
 		this.descripcion = descripcion;
@@ -64,7 +72,42 @@ public class Actividad extends DomainEntity{
 		this.maximosParticipantes = maximosParticipantes;
 		this.estadoActividad = estadoActividad;
 		this.solicitudes = solicitudes;
+		this.comentario = comentario;
 	}
+
+
+	
+
+
+
+
+
+
+
+
+	public String getComentario() {
+		return comentario;
+	}
+
+
+
+
+
+
+
+
+
+
+
+	public void setComentario(String comentario) {
+		this.comentario = comentario;
+	}
+
+
+
+
+
+
 
 
 

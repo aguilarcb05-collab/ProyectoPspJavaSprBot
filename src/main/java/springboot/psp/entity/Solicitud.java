@@ -3,6 +3,7 @@ package springboot.psp.entity;
 import java.time.LocalDate;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
@@ -11,36 +12,59 @@ public class Solicitud {
 	private LocalDate fechaSolicitud;
 	@NotNull
 	private TipoEstadoSolicitud tipoSolicitud;
-	@NotNull
-	private String comentario;
-	public Solicitud(@NotNull LocalDate fechaSolicitud, @NotNull TipoEstadoSolicitud tipoSolicitud,
-			@NotNull String comentario) {
+	
+	@ManyToOne
+	private Usuario usuario;
+	
+	@ManyToOne
+	private Actividad actividad;
+
+	public Solicitud(@NotNull LocalDate fechaSolicitud, @NotNull TipoEstadoSolicitud tipoSolicitud, Usuario usuario,
+			Actividad actividad) {
 		super();
 		this.fechaSolicitud = fechaSolicitud;
 		this.tipoSolicitud = tipoSolicitud;
-		this.comentario = comentario;
+		this.usuario = usuario;
+		this.actividad = actividad;
 	}
+
 	public Solicitud() {
 		super();
 	}
+
 	public LocalDate getFechaSolicitud() {
 		return fechaSolicitud;
 	}
+
 	public void setFechaSolicitud(LocalDate fechaSolicitud) {
 		this.fechaSolicitud = fechaSolicitud;
 	}
+
 	public TipoEstadoSolicitud getTipoSolicitud() {
 		return tipoSolicitud;
 	}
+
 	public void setTipoSolicitud(TipoEstadoSolicitud tipoSolicitud) {
 		this.tipoSolicitud = tipoSolicitud;
 	}
-	public String getComentario() {
-		return comentario;
+
+	public Usuario getUsuario() {
+		return usuario;
 	}
-	public void setComentario(String comentario) {
-		this.comentario = comentario;
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
+
+	public Actividad getActividad() {
+		return actividad;
+	}
+
+	public void setActividad(Actividad actividad) {
+		this.actividad = actividad;
+	}
+	
+	
 	
 	
 }

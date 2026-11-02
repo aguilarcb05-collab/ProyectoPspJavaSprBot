@@ -26,139 +26,19 @@ public class AdministradorService {
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private AdministradorRepository administradorRepository;
-	@Autowired
-	private ActividadRepository actividadRepository;
-	@Autowired
-	private SolicitudRepository solicitudRepository;
-	@Autowired
-	private NoticiaRepository noticiaRepository;
 	
-	public List<Usuario> revisarUsuario(){
-		return usuarioRepository.findAll();
-	}
-	
-	
+	//4a
+	public List<Usuario> revisarUsuarios() {
+        return usuarioRepository.findAll();
+    }
+	//4a
 	public List<Administrador> revisarAdministradores(){
 		return administradorRepository.findAll();
 	}
-	
-	public List<Actividad> listarActividades(){
-		return actividadRepository.findAll();
+	//4a
+	public Optional<Administrador> revisarAdministrador(int idAdminisrador){
+		return administradorRepository.findById(idAdminisrador);
 	}
 	
-	public Actividad crearActividad(Actividad actividadNueva) {
-		return actividadRepository.save(actividadNueva);
-	}
-	
-	@Transactional
-	public Actividad modificarActividad(int idActividad, Actividad actividadModificada) {
-		Optional<Actividad> actividadOpcional=actividadRepository.findById(idActividad);
-		if(actividadOpcional.isPresent()) {
-			actividadOpcional.get().setDescripcion(actividadModificada.getDescripcion());
-			actividadOpcional.get().setFecha((actividadModificada.getFecha()));
-			actividadOpcional.get().setNombre(actividadModificada.getNombre());
-			actividadOpcional.get().setHoraInicio(actividadModificada.getHoraInicio());
-			actividadOpcional.get().setHoraFinalizacion(actividadModificada.getHoraFinalizacion());
-			actividadOpcional.get().setMaximosParticipantes(actividadModificada.getMaximosParticipantes());
-			actividadOpcional.get().setUbicacion(actividadModificada.getUbicacion());
-			return actividadOpcional.get();
-		}
-		return null;
-		
-	}
-	
-	@Transactional
-	public Boolean borrarActividad(int idActividad) {
-		Boolean encontrado=false;
-		Optional<Actividad> actividadOpcional=actividadRepository.findById(idActividad);
-		if(actividadOpcional.isPresent()) {
-			actividadRepository.deleteById(idActividad);
-			encontrado=true;
-		}
-		return encontrado;
-	}
-	
-	public List<Solicitud> listaSolicituds(){
-		return solicitudRepository.findAll();
-	}
-	
-	@Transactional
-	public Solicitud aprobarSolicitud(int idSolicitud, int idActividad) {
-	    Optional<Solicitud> solicitudOpcional = solicitudRepository.findById(idSolicitud);
-	    Optional<Actividad> actividadOpcional = actividadRepository.findById(idActividad);
-	    
-	    if (solicitudOpcional.isPresent() && actividadOpcional.isPresent()) {
-	        
-	        Actividad actividad = actividadOpcional.get();
-	        Solicitud s = solicitudOpcional.get();
-	        
-	        if (actividad.getSolicitudes().contains(s)) {
-	            
-	            int contadorAprobadas = 0;
-	            for (Solicitud solicitudActual : actividad.getSolicitudes()) {
-	                if (solicitudActual.getTipoSolicitud().equals(TipoEstadoSolicitud.APROBADA)) {
-	                    contadorAprobadas++;
-	                }
-	            }
-	            
-	            if (actividad.getMaximosParticipantes() > contadorAprobadas) {
-	                
-	                // Si no estaba aprobada ya, la aprobamos
-	                if (!s.getTipoSolicitud().equals(TipoEstadoSolicitud.APROBADA)) {
-	                    s.setTipoSolicitud(TipoEstadoSolicitud.APROBADA);
-	                    return s;
-	                }
-	            }
-	        }
-	    }
-	    
-	    // Si algo falla  devuelve null
-	    return null;
-	}
-	
-	@Transactional
-	public Solicitud rechazarSolicitud(int idSolicitud) {
-		Optional <Solicitud> solicitudOpcional=solicitudRepository.findById(idSolicitud);
-		if(solicitudOpcional.isPresent()) {
-			Solicitud s=solicitudOpcional.get();
-			if(!s.getTipoSolicitud().equals(TipoEstadoSolicitud.RECHAZADA)) {
-				s.setTipoSolicitud(TipoEstadoSolicitud.RECHAZADA);
-				return s;
-			}
-		}
-		return null;
-	}
-	
-	//ME FALTA EL CODIGO DEL APARTADO D
-	
-	@Transactional
-	public List<Noticia> listaNoticias() {
-		return noticiaRepository.findAll();
-	}
-	
-	public Noticia crearNoticia(Noticia noticiaNueva) {
-		return noticiaRepository.save(noticiaNueva);
-	}
-	
-	@Transactional
-	public Noticia modificarNoticia(int idNoticia, Noticia noticiaModificada) {
-		Optional<Noticia> noticiaOpcional=noticiaRepository.findById(idNoticia);
-		if(noticiaOpcional.isPresent()) {
-			noticiaOpcional.get().setTitulo(noticiaModificada.getTitulo());
-			noticiaOpcional.get().setContenido(noticiaModificada.getContenido());
-			noticiaOpcional.get().setFechaPublicacion(noticiaModificada.getFechaPublicacion());
-			noticiaOpcional.get().setImagen(noticiaModificada.getImagen());
-			return noticiaOpcional.get();
-		}
-		return null;
-	}
-	
-	@Transactional
-	public void eliminarNoticia(int idNoticia) {
-		Optional<Noticia> noticiaOpcional=noticiaRepository.findById(idNoticia);
-		if(noticiaOpcional.isPresent()) {
-			noticiaRepository.deleteById(idNoticia);
-		}
-	}
 	
 }
