@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import jakarta.transaction.Transactional;
 import springboot.psp.entity.Actividad;
 import springboot.psp.entity.Solicitud;
+import springboot.psp.entity.TipoEstadoActividad;
 import springboot.psp.entity.TipoEstadoSolicitud;
 import springboot.psp.entity.Usuario;
 import springboot.psp.repository.ActividadRepository;
@@ -110,11 +111,24 @@ public class SolicitudService {
 	public Solicitud crearSolicitudDeInscripcion(int idUsuario, int idActividad) {
 		Optional<Usuario> usuarioOpcional = usuarioRepository.findById(idUsuario);
 		Optional<Actividad> actividadOpcional = actividadRepository.findById(idActividad);
-		if (usuarioOpcional.isPresent() && actividadOpcional.isPresent()) {
-			Solicitud solicitudNueva = new Solicitud(LocalDate.now(), TipoEstadoSolicitud.PENDIENTE,
-					usuarioOpcional.get(), actividadOpcional.get());
-			return solicitudRepository.save(solicitudNueva);
+		if (usuarioOpcional.isEmpty() || actividadOpcional.isEmpty()) {
+			return null;
 		}
-		return null;
+
+		Usuario usuario = usuarioOpcional.get();
+		Actividad actividad = actividadOpcional.get();
+
+		// Solo si la actividad está ABIERTA
+		if (!TipoEstadoActividad.ABIERTA.equals(actividad.getEstadoActividad())) {
+			return null;
+		}
+
+		// Un usuario no puede tener más de una solicitud para la misma actividad
+		if (solicitudRepository.existsByUsuarioAndActividad(usuario, actividad)) {
+			return null;
+		}
+
+		Solicitud solicitudNueva = new Solicitud(LocalDate.now(), TipoEstadoSolicitud.PENDIENTE, usuario, actividad);
+		return solicitudRepository.save(solicitudNueva);
 	}
 }

@@ -2,9 +2,12 @@ package springboot.psp.entity;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -33,11 +36,12 @@ public class Actividad extends DomainEntity{
     @NotNull
     private int maximosParticipantes;
 
-    @NotBlank
+    @NotNull
+    @Enumerated(EnumType.STRING)
     private TipoEstadoActividad estadoActividad;
     
-    @OneToMany
-    private List<Solicitud> solicitudes;
+    @OneToMany(mappedBy = "actividad")
+    private List<Solicitud> solicitudes = new ArrayList<>();
     
     private String comentario;
 
