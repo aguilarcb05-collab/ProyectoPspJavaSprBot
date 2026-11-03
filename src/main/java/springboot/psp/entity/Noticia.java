@@ -7,7 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 @Entity
-public class Noticia {
+public class Noticia extends DomainEntity {
 
 	@NotBlank
 	private String titulo;
